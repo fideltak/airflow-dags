@@ -1,10 +1,16 @@
-import boto3
 import json
-
+import subprocess
+import sys
 
 class client:
 
     def __init__(self, s3_url, token):
+        try:
+            import boto3
+        except ImportError:
+            subprocess.check_call(
+                [sys.executable, "-m", "pip", "install", "boto3"])
+        import boto3
         self.client = boto3.client(
             "s3",
             endpoint_url=s3_url,

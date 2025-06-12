@@ -19,6 +19,7 @@ class data:
 
         request_df = pd.DataFrame(request_list)
         response_df = pd.DataFrame(response_list)
+        print(f"AAAAAAAA{request_df.head()}")
 
         id_list = request_df.iloc[:, 0].tolist()
         merged_data_list = []
