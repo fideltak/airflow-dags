@@ -82,7 +82,7 @@ S3_PREFIX = "Airflow"
 #     kubectl create secret generic disney-s3 \
 #       --from-literal=AWS_ACCESS_KEY_ID=... \
 #       --from-literal=AWS_SECRET_ACCESS_KEY=...
-S3_SECRET = "disney-s3"
+S3_SECRET = "s3"
 
 # ==========================================================
 # 3. 実行する場所
