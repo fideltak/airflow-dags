@@ -47,7 +47,7 @@ import os
 #     形で失敗します。必ず "レジストリ名/イメージ名:タグ" で書きます。
 #
 #   例) "registry.example.com/disney/disney-jobs:2.0.0"
-IMAGE = "docker.io/ryota0510/disney-jobs:2.0.1"
+IMAGE = "docker.io/ryota0510/disney-jobs:2.0.2"
 
 # イメージの取得方針。タグを固定して使うので、毎回取り直す必要はない。
 IMAGE_PULL_POLICY = "IfNotPresent"
