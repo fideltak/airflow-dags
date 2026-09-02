@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 dags/disney_collector_dag.py
 ============================
@@ -73,7 +73,6 @@ from disney_common import (
     dag_kwargs,
     JST,
     make_task,
-    slot_template,
 )
 
 with DAG(
@@ -90,9 +89,6 @@ with DAG(
     # 共有環境向けの指定(同時に使う枠の上限・優先度)
     **dag_kwargs(),
 ) as dag:
-
-    slot = slot_template()
-
     # 収集は軽い(HTTPで取ってCSVに1列足すだけ)ので、資源は控えめでよい。
     # 30分スロットなので、次の実行までに終わる範囲で再試行する。
     common = dict(memory=COLLECT_MEMORY, cpu=COLLECT_CPU, retries=2,
@@ -100,11 +96,11 @@ with DAG(
 
     tasks = [
         make_task("collect_tdl",
-                  ["collect", "--park", "tdl", "--slot", slot], **common),
+                  ["collect", "--park", "tdl"], **common),
         make_task("collect_tds",
-                  ["collect", "--park", "tds", "--slot", slot], **common),
+                  ["collect", "--park", "tds"], **common),
         make_task("collect_weather",
-                  ["collect", "--weather", "--slot", slot], **common),
+                  ["collect", "--weather"], **common),
     ]
 
     # ★1つでも取れていれば、この実行は成功とみなす
@@ -112,3 +108,5 @@ with DAG(
     collected = EmptyOperator(task_id="collected", trigger_rule="one_success")
 
     tasks >> collected
+
+
